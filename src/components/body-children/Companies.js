@@ -73,11 +73,11 @@ class Companies extends Component {
                             <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         </div>
                     </div>
+
                     {
-                        for(let company in this.state.companies ){
-                            alert(company);
-                        }
+                        this.state.companies.forEach((value,key,map)=> <Company name={value.name} description={value.description} />)
                     }
+
                 </div>
                 <br/>
                     <h6> - Admin Panel</h6>
@@ -127,5 +127,19 @@ const head = {
     color: 'white',
     fontSize: '30px'
 }
+
+
+const Company = (props) => {
+    return (
+      <div className="card col" style={{width: '18rem'}}>
+          {/* <img className="card-img-top" src="/assets/Logo.png" alt="Card image cap"/> */}
+          <div className="card-img-top" style={head}>props.name</div>
+          <div className="card-body">
+              <p className="card-text">props.description</p>
+          </div>
+      </div>
+    )
+}
+
 
 export default Companies;
