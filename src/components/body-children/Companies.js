@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import CompanyUser from './CompanyUser';
+import CompanyAdmin from './CompanyAdmin';
+
 class Companies extends Component {
     render(){
         return (
@@ -72,6 +75,9 @@ class Companies extends Component {
                         </div>
                     </div>
                 </div>
+
+                <CompanyUser/>
+                <CompanyAdmin/>
             </div>            
         );
     }
