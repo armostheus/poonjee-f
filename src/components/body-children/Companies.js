@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {  Route,Link } from "react-router-dom";
+import { BrowserRouter as Router, Route,Link } from "react-router-dom";
 
 import CompanyUser from './CompanyUser';
 import CompanyAdmin from './CompanyAdmin';
@@ -49,37 +49,41 @@ class Companies extends Component {
 
         let allCompaniesUser = [],
             allCompaniesAdmin = [];
-        this.state.companies.forEach((value,key,map)=>{ allCompaniesUser.push(<Company compId={value.id} name={value.name} description={value.description} role='U' thisValue={this} />) });
-        this.state.companies.forEach((value,key,map)=>{ allCompaniesAdmin.push(<Company compId={value.id} name={value.name} description={value.description} role='A' thisValue={this}/>) });
+        this.state.companies.forEach((value,key,map)=>{ allCompaniesUser.push(<Company key={value.id} compId={value.id} name={value.name} description={value.description} role='U' thisValue={this} />) });
+        this.state.companies.forEach((value,key,map)=>{ allCompaniesAdmin.push(<Company key={value.id} compId={value.id} name={value.name} description={value.description} role='A' thisValue={this}/>) });
 
         return (
+            <Router>
             <div>
-                <h4>Companies</h4> <h6> - User Panel</h6>
-                <div className="user-panel container-fluid row">
-                    {allCompaniesUser}
-                </div>
-                <br/>
-                    <h6> - Admin Panel</h6>
-                <div className="admin-panel container-fluid row">
-                    {allCompaniesAdmin}
-                </div>
-
-                <Route path="/company/user" render={props => (
+                <Route exact path="/dashboard/" render={props => (
                     <React.Fragment>
-                        <h3>Company user</h3>
+                        <h4>Companies</h4> <h6> - User Panel</h6>
+                        <div className="user-panel container-fluid row">
+                            {allCompaniesUser}
+                        </div>
+                        <br/>
+                            <h6> - Admin Panel</h6>
+                        <div className="admin-panel container-fluid row">
+                            {allCompaniesAdmin}
+                        </div>
+                    </React.Fragment>
+                )} />
+                
+
+                <Route path="/dashboard/company-user" render={props => (
+                    <React.Fragment>
                         <CompanyUser details={this.state.selectedCompany}/>
                     </React.Fragment>
                 )} />
                 
-                <Route path="/company/admin" render={props => (
+                <Route path="/dashboard/company-admin" render={props => (
                     <React.Fragment>
                         <CompanyAdmin details={this.state.selectedCompany}/>
                     </React.Fragment>
-                )} />
-
-                <CompanyUser details={this.state.selectedCompany}/>
+                )} /> 
   
-            </div>            
+            </div>  
+            </Router>          
         );
     }
 
@@ -98,7 +102,7 @@ function Company(props) {
         return (
             
             <div className="card col" style={{width: '18rem'}}  onClick={() => {props.thisValue.changeState(props.compId)}}>
-                <Link to="/company/admin" style={{ textDecoration: 'none', color: 'black' }}>
+                <Link to="/dashboard/company-admin" style={{ textDecoration: 'none', color: 'black' }}>
                     <div className="card-img-top" style={head}>{props.name}</div>
                     <div className="card-body">
                         <p className="card-text">{props.description} & {props.role}</p>
@@ -110,7 +114,7 @@ function Company(props) {
     } else {
         return (
             <div className="card col" style={{width: '18rem'}}  onClick={() => {props.thisValue.changeState(props.compId)}}>
-                <Link to="/company/user" style={{ textDecoration: 'none', color: 'black' }}>
+                <Link to="/dashboard/company-user" style={{ textDecoration: 'none', color: 'black' }}>
                     <div className="card-img-top" style={head}>{props.name}</div>
                     <div className="card-body">
                         <p className="card-text">{props.description} & {props.role}</p>
