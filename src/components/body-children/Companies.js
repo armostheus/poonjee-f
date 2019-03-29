@@ -53,7 +53,6 @@ class Companies extends Component {
         this.state.companies.forEach((value,key,map)=>{ allCompaniesAdmin.push(<Company key={value.id} compId={value.id} name={value.name} description={value.description} role='A' thisValue={this}/>) });
 
         return (
-            <Router>
             <div>
                 <Route exact path="/dashboard/" render={props => (
                     <React.Fragment>
@@ -82,8 +81,7 @@ class Companies extends Component {
                     </React.Fragment>
                 )} /> 
   
-            </div>  
-            </Router>          
+            </div>          
         );
     }
 
