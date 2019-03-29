@@ -64,17 +64,20 @@ class Companies extends Component {
                     {allCompaniesAdmin}
                 </div>
 
-                <Route path="/user" render={props => (
+                <Route path="/company/user" render={props => (
                     <React.Fragment>
-                    <CompanyUser details={this.state.selectedCompany}/>
+                        <h3>Company user</h3>
+                        <CompanyUser details={this.state.selectedCompany}/>
                     </React.Fragment>
                 )} />
                 
-                <Route path="/admin" render={props => (
+                <Route path="/company/admin" render={props => (
                     <React.Fragment>
-                    <CompanyAdmin details={this.state.selectedCompany}/>
+                        <CompanyAdmin details={this.state.selectedCompany}/>
                     </React.Fragment>
                 )} />
+
+                <CompanyUser details={this.state.selectedCompany}/>
   
             </div>            
         );
@@ -93,27 +96,28 @@ const head = {
 function Company(props) {
     if(props.role === 'A'){
         return (
-            <Link to="/user">
-                <div className="card col" style={{width: '18rem'}}  onClick={props.thisValue.changeState(props.compId)}>
-                    {/* <img className="card-img-top" src="/assets/Logo.png" alt="Card image cap"/> */}
+            
+            <div className="card col" style={{width: '18rem'}}  onClick={() => {props.thisValue.changeState(props.compId)}}>
+                <Link to="/company/admin" style={{ textDecoration: 'none', color: 'black' }}>
                     <div className="card-img-top" style={head}>{props.name}</div>
                     <div className="card-body">
                         <p className="card-text">{props.description} & {props.role}</p>
                     </div>
-                </div>
-            </Link>
+                </Link>    
+            </div>
+            
         );
     } else {
         return (
-            <Link to="/admin/">
-                <div className="card col" style={{width: '18rem'}}  onClick={props.thisValue.changeState(props.compId)}>
-                    {/* <img className="card-img-top" src="/assets/Logo.png" alt="Card image cap"/> */}
+            <div className="card col" style={{width: '18rem'}}  onClick={() => {props.thisValue.changeState(props.compId)}}>
+                <Link to="/company/user" style={{ textDecoration: 'none', color: 'black' }}>
                     <div className="card-img-top" style={head}>{props.name}</div>
                     <div className="card-body">
                         <p className="card-text">{props.description} & {props.role}</p>
                     </div>
-                </div>
-            </Link>
+                
+                </Link>
+            </div>
         );
     }   
 }

@@ -5,8 +5,7 @@ class Body extends Component {
     render(){
         return (
             <div>               
-                <Companies/>
-                
+                <Companies/>  
             </div>
         );
     }
